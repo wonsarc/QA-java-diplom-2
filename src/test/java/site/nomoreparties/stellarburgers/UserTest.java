@@ -45,7 +45,7 @@ public class UserTest {
         String token = userClient.create(user).extract().path("accessToken");
         UserDataJson body = new UserDataJson(null, null, (RandomStringUtils.randomAlphabetic(10)));
         userClient.editData(body, token);
-        ValidatableResponse response = userClient.manualLogin(new UserDataJson(null, user.email, body.getKey("password")));
+        ValidatableResponse response = userClient.login(new UserDataJson(null, user.email, body.getKey("password")));
         Assert.assertTrue(response.extract().statusCode() == 200);
         Assert.assertTrue(response.extract().path("success"));
         Assert.assertTrue(response.extract().path("message") == null);

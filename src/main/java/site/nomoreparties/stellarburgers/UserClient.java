@@ -29,7 +29,7 @@ public class UserClient extends RestAssuredClient {
     }
 
     @Step
-    public ValidatableResponse manualLogin(UserDataJson credentials) {
+    public ValidatableResponse login(UserDataJson credentials) {
         return given()
                 .spec(getBaseSpec())
                 .body(credentials)
