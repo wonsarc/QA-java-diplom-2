@@ -48,16 +48,4 @@ public class UserClient extends RestAssuredClient {
                 .patch(USER_PATH + "/user")
                 .then();
     }
-
-//    @Step
-//    public ValidatableResponse getData(String bearerToken) {
-//        return given()
-//                .headers(
-//                        "Authorization",
-//                        "Bearer " + bearerToken)
-//                .spec(getBaseSpec())
-//                .when()
-//                .get(USER_PATH + "/user")
-//                .then();
-//    }
 }
