@@ -1,6 +1,7 @@
 package site.nomoreparties.stellarburgers;
 
 import io.qameta.allure.Step;
+import io.restassured.response.ValidatableResponse;
 
 import static io.restassured.RestAssured.given;
 
@@ -15,5 +16,16 @@ public class OrderClient extends RestAssuredClient {
                 .when()
                 .get(INGRIDIENTS_PATH)
                 .body().as(IngridientsJson.class);
+    }
+
+    @Step
+    public ValidatableResponse create(IngridientsDataJson ingridients, String bearerToken) {
+        return given()
+                .headers("Authorization", bearerToken)
+                .spec(getBaseSpec())
+                .body(ingridients)
+                .when()
+                .get(ORDER_PATH)
+                .then();
     }
 }
