@@ -3,11 +3,9 @@ package site.nomoreparties.stellarburgers;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class User {
-
     public String email;
     public String password;
     public String name;
-
 
     public User(String email, String password, String name) {
         this.email = email;

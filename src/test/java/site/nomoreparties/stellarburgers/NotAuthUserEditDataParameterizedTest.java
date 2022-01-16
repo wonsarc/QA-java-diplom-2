@@ -33,7 +33,7 @@ public class NotAuthUserEditDataParameterizedTest {
 
     @Test
     public void notEditDataParameterizedTest() {
-        ValidatableResponse response = userClient.editData(body, "123");
+        ValidatableResponse response = userClient.editData(body);
         Assert.assertEquals("You should be authorised", response.extract().path("message"));
         Assert.assertTrue(response.extract().statusCode() == 401);
         Assert.assertFalse(response.extract().path("success"));

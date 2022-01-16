@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class UserTest {
-
     private UserClient userClient;
     private User user;
 

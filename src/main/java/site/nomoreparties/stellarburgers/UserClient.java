@@ -48,4 +48,14 @@ public class UserClient extends RestAssuredClient {
                 .patch(USER_PATH + "/user")
                 .then();
     }
+
+    @Step
+    public ValidatableResponse editData(UserDataJson userData) {
+        return given()
+                .spec(getBaseSpec())
+                .body(userData)
+                .when()
+                .patch(USER_PATH + "/user")
+                .then();
+    }
 }

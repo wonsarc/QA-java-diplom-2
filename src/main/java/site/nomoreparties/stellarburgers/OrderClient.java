@@ -6,7 +6,7 @@ import io.restassured.response.ValidatableResponse;
 import static io.restassured.RestAssured.given;
 
 public class OrderClient extends RestAssuredClient {
-    private static final String ORDER_PATH = "api/orders/";
+    private static final String ORDER_PATH = "api/orders";
     private static final String INGRIDIENTS_PATH = "api/ingredients";
 
     @Step
@@ -25,7 +25,17 @@ public class OrderClient extends RestAssuredClient {
                 .spec(getBaseSpec())
                 .body(ingridients)
                 .when()
-                .get(ORDER_PATH)
+                .post(ORDER_PATH)
+                .then();
+    }
+
+    @Step
+    public ValidatableResponse create(IngridientsDataJson ingridients) {
+        return given()
+                .spec(getBaseSpec())
+                .body(ingridients)
+                .when()
+                .post(ORDER_PATH)
                 .then();
     }
 }
