@@ -18,7 +18,7 @@ public class OrderTest {
     }
 
     @Test
-    public void authOrderCreateWithWrongHashIngridient() {
+    public void authOrderCreateWithWrongHashIngridientTest() {
         String token = userClient.create(user).extract().path("accessToken");
         IngridientsDataJson body = new IngridientsDataJson("test");
         ValidatableResponse response = orderClient.create(body, token);
@@ -26,9 +26,24 @@ public class OrderTest {
     }
 
     @Test
-    public void notAuthOrderCreateWithWrongHashIngridient() {
+    public void notAuthOrderCreateWithWrongHashIngridientTest() {
         IngridientsDataJson body = new IngridientsDataJson("test");
         ValidatableResponse response = orderClient.create(body);
         Assert.assertTrue(response.extract().statusCode() == 500);
+    }
+
+    @Test
+    public void authGetOrderTest() {
+        String token = userClient.create(user).extract().path("accessToken");
+        ValidatableResponse response = orderClient.get(token);
+        Assert.assertTrue(response.extract().statusCode() == 200);
+        Assert.assertTrue(response.extract().path("success"));
+    }
+
+    @Test
+    public void notAuthGetOrderTest() {
+        ValidatableResponse response = orderClient.get();
+        Assert.assertTrue(response.extract().statusCode() == 401);
+        Assert.assertEquals("You should be authorised", response.extract().path("message"));
     }
 }

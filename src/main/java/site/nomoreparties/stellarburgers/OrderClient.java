@@ -38,4 +38,23 @@ public class OrderClient extends RestAssuredClient {
                 .post(ORDER_PATH)
                 .then();
     }
+
+    @Step
+    public ValidatableResponse get() {
+        return given()
+                .spec(getBaseSpec())
+                .when()
+                .get(ORDER_PATH)
+                .then();
+    }
+
+    @Step
+    public ValidatableResponse get(String bearerToken) {
+        return given()
+                .headers("Authorization", bearerToken)
+                .spec(getBaseSpec())
+                .when()
+                .get(ORDER_PATH)
+                .then();
+    }
 }
