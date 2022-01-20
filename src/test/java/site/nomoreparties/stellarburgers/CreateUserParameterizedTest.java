@@ -8,13 +8,13 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 @RunWith(Parameterized.class)
-public class UserCreateParameterizedTest {
+public class CreateUserParameterizedTest {
     private final User user;
     private final int statusCode;
     private final String message;
     private UserClient userClient;
 
-    public UserCreateParameterizedTest(User user, int statusCode, String message) {
+    public CreateUserParameterizedTest(User user, int statusCode, String message) {
         this.user = user;
         this.statusCode = statusCode;
         this.message = message;
@@ -36,7 +36,7 @@ public class UserCreateParameterizedTest {
     }
 
     @Test
-    public void userCreatedTest() {
+    public void userCreatedAllFieldsAndWithoutPasswordAndWithoutNameAndWithoutEmailTest() {
         ValidatableResponse response = userClient.create(user);
         Assert.assertTrue(statusCode == response.extract().statusCode());
         Assert.assertEquals(message, response.extract().path("message"));

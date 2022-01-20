@@ -9,11 +9,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 @RunWith(Parameterized.class)
-public class NotAuthUserEditDataParameterizedTest {
+public class EditDataNotAuthUserParameterizedTest {
     private final UserDataJson body;
     private UserClient userClient;
 
-    public NotAuthUserEditDataParameterizedTest(UserDataJson body) {
+    public EditDataNotAuthUserParameterizedTest(UserDataJson body) {
         this.body = body;
     }
 
@@ -32,7 +32,7 @@ public class NotAuthUserEditDataParameterizedTest {
     }
 
     @Test
-    public void notEditDataParameterizedTest() {
+    public void editNameAndEmailAndPasswordNotAuthUserParameterizedTest() {
         ValidatableResponse response = userClient.editData(body);
         Assert.assertEquals("You should be authorised", response.extract().path("message"));
         Assert.assertTrue(response.extract().statusCode() == 401);

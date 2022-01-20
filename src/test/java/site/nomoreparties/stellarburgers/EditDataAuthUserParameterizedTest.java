@@ -11,13 +11,13 @@ import org.junit.runners.Parameterized;
 import java.util.HashMap;
 
 @RunWith(Parameterized.class)
-public class AuthUserEditDataParameterizedTest {
+public class EditDataAuthUserParameterizedTest {
     private final UserDataJson body;
     private final String userDataParam;
     private User user;
     private UserClient userClient;
 
-    public AuthUserEditDataParameterizedTest(UserDataJson body, String userDataParam) {
+    public EditDataAuthUserParameterizedTest(UserDataJson body, String userDataParam) {
         this.body = body;
         this.userDataParam = userDataParam;
     }
@@ -37,7 +37,7 @@ public class AuthUserEditDataParameterizedTest {
     }
 
     @Test
-    public void userCreatedTest() {
+    public void editNameAndEmailAuthUserParameterizedTest() {
         String token = userClient.create(user).extract().path("accessToken");
         ValidatableResponse response = userClient.editData(body, token);
         HashMap<String, String> userInfo = response.extract().path("user");

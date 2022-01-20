@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 @RunWith(Parameterized.class)
-public class AuthOrderCreateParameterizedTest {
+public class CreateOrderNotAuthUserParameterizedTest {
     private final IngridientsDataJson body;
     private final int code;
     private final String message;
@@ -17,7 +17,7 @@ public class AuthOrderCreateParameterizedTest {
     private UserClient userClient;
     private User user;
 
-    public AuthOrderCreateParameterizedTest(IngridientsDataJson body, int code, String message, Boolean success) {
+    public CreateOrderNotAuthUserParameterizedTest(IngridientsDataJson body, int code, String message, Boolean success) {
         this.body = body;
         this.code = code;
         this.message = message;
@@ -40,9 +40,8 @@ public class AuthOrderCreateParameterizedTest {
     }
 
     @Test
-    public void userCreatedTest() {
-        String token = userClient.create(user).extract().path("accessToken");
-        ValidatableResponse response = orderClient.create(body, token);
+    public void createOrderNotAuthUserWithAndWithoutIngridientsTest() {
+        ValidatableResponse response = orderClient.create(body);
         Assert.assertTrue(response.extract().statusCode() == code);
         Assert.assertTrue(response.extract().path("success") == success);
         Assert.assertEquals(message, response.extract().path("message"));

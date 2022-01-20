@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class OrderTest {
+public class GetOrderTest {
     private OrderClient orderClient;
     private UserClient userClient;
     private User user;
@@ -18,22 +18,7 @@ public class OrderTest {
     }
 
     @Test
-    public void authOrderCreateWithWrongHashIngridientTest() {
-        String token = userClient.create(user).extract().path("accessToken");
-        IngridientsDataJson body = new IngridientsDataJson("test");
-        ValidatableResponse response = orderClient.create(body, token);
-        Assert.assertTrue(response.extract().statusCode() == 500);
-    }
-
-    @Test
-    public void notAuthOrderCreateWithWrongHashIngridientTest() {
-        IngridientsDataJson body = new IngridientsDataJson("test");
-        ValidatableResponse response = orderClient.create(body);
-        Assert.assertTrue(response.extract().statusCode() == 500);
-    }
-
-    @Test
-    public void authGetOrderTest() {
+    public void getOrderAuthUserTest() {
         String token = userClient.create(user).extract().path("accessToken");
         ValidatableResponse response = orderClient.get(token);
         Assert.assertTrue(response.extract().statusCode() == 200);
@@ -41,7 +26,7 @@ public class OrderTest {
     }
 
     @Test
-    public void notAuthGetOrderTest() {
+    public void getOrderNotAuthUserTest() {
         ValidatableResponse response = orderClient.get();
         Assert.assertTrue(response.extract().statusCode() == 401);
         Assert.assertEquals("You should be authorised", response.extract().path("message"));
